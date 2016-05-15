@@ -20,9 +20,10 @@ public class principal extends javax.swing.JFrame {
     List Empleados = new List();
     List Productos_Inventario=new List();
     List materiales_de_productos=new List();
+    Queue ordenes = new Queue();
 
     /**
-     * Creat es new form principal
+     * Creates new form principal
      */
     public principal() {
         initComponents();
@@ -51,7 +52,7 @@ public class principal extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        jComboBox4 = new javax.swing.JComboBox<String>();
         jLabel13 = new javax.swing.JLabel();
         NOmbre_materiales_Mod1 = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -62,7 +63,7 @@ public class principal extends javax.swing.JFrame {
         Direccion_materiales_Mod1 = new javax.swing.JTextField();
         jButton9 = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<String>();
         jLabel11 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
         jEmpleados = new javax.swing.JDialog();
@@ -78,7 +79,7 @@ public class principal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         Direccion = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<String>();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -90,7 +91,7 @@ public class principal extends javax.swing.JFrame {
         Edad_Empleado = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<String>();
         jLabel9 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         Productos = new javax.swing.JDialog();
@@ -102,7 +103,7 @@ public class principal extends javax.swing.JFrame {
         Nombre_producto_mod = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         Descripcion_producto_mod = new javax.swing.JTextField();
-        jComboBox5 = new javax.swing.JComboBox<>();
+        jComboBox5 = new javax.swing.JComboBox<String>();
         jLabel20 = new javax.swing.JLabel();
         tiempo_producto_mod = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
@@ -111,13 +112,13 @@ public class principal extends javax.swing.JFrame {
         Descripcion_producto = new javax.swing.JTextField();
         Nombre_Producto = new javax.swing.JTextField();
         jButton12 = new javax.swing.JButton();
-        jComboBox7 = new javax.swing.JComboBox<>();
+        jComboBox7 = new javax.swing.JComboBox<String>();
         jLabel40 = new javax.swing.JLabel();
         jButton14 = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
         tiempo = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
-        jComboBox6 = new javax.swing.JComboBox<>();
+        jComboBox6 = new javax.swing.JComboBox<String>();
         jLabel39 = new javax.swing.JLabel();
         jButton13 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -147,11 +148,6 @@ public class principal extends javax.swing.JFrame {
         jLabel26.setText("Dirección");
 
         Dirección_materiales.setText("jTextField1");
-        Dirección_materiales.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Dirección_materialesActionPerformed(evt);
-            }
-        });
 
         jButton8.setText("Agregar");
         jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -211,7 +207,7 @@ public class principal extends javax.swing.JFrame {
 
         jLabel12.setText("Seleccione el empleado a ELiminar");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel13.setText("Nombre ");
 
@@ -300,7 +296,7 @@ public class principal extends javax.swing.JFrame {
 
         jTabbedPane5.addTab("Modificar Materiales", jPanel9);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel11.setText("Seleccione el empleado a ELiminar");
 
@@ -372,68 +368,39 @@ public class principal extends javax.swing.JFrame {
                 jButton5MouseClicked(evt);
             }
         });
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
         jPanel2.add(jButton5);
-        jButton5.setBounds(170, 346, 65, 31);
+        jButton5.setBounds(170, 346, 75, 23);
 
         jLabel10.setText("Seleccione el empleado a Modificar");
         jPanel2.add(jLabel10);
-        jLabel10.setBounds(120, 20, 240, 17);
+        jLabel10.setBounds(120, 20, 240, 14);
 
         jLabel5.setText("Nombre ");
         jPanel2.add(jLabel5);
-        jLabel5.setBounds(59, 104, 49, 17);
-
-        Nombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NombreActionPerformed(evt);
-            }
-        });
+        jLabel5.setBounds(59, 104, 40, 14);
         jPanel2.add(Nombre);
-        Nombre.setBounds(141, 104, 180, 27);
+        Nombre.setBounds(141, 104, 180, 20);
 
         jLabel6.setText("Identidad");
         jPanel2.add(jLabel6);
-        jLabel6.setBounds(60, 170, 53, 17);
-
-        Identidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IdentidadActionPerformed(evt);
-            }
-        });
+        jLabel6.setBounds(60, 170, 46, 14);
         jPanel2.add(Identidad);
-        Identidad.setBounds(141, 164, 170, 27);
-
-        Edad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EdadActionPerformed(evt);
-            }
-        });
+        Identidad.setBounds(141, 164, 170, 20);
         jPanel2.add(Edad);
-        Edad.setBounds(140, 270, 180, 27);
+        Edad.setBounds(140, 270, 180, 20);
 
         jLabel7.setText("Edad");
         jPanel2.add(jLabel7);
-        jLabel7.setBounds(59, 278, 28, 17);
+        jLabel7.setBounds(59, 278, 24, 14);
 
         jLabel8.setText("Dirección");
         jPanel2.add(jLabel8);
-        jLabel8.setBounds(59, 225, 53, 17);
-
-        Direccion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DireccionActionPerformed(evt);
-            }
-        });
+        jLabel8.setBounds(59, 225, 43, 14);
         jPanel2.add(Direccion);
-        Direccion.setBounds(141, 220, 170, 27);
+        Direccion.setBounds(141, 220, 170, 20);
 
         jPanel2.add(jComboBox2);
-        jComboBox2.setBounds(150, 40, 154, 27);
+        jComboBox2.setBounds(150, 40, 154, 20);
 
         jTabbedPane1.addTab("Modificar  Empleado", jPanel2);
 
@@ -457,11 +424,6 @@ public class principal extends javax.swing.JFrame {
         jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton7MouseClicked(evt);
-            }
-        });
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
             }
         });
 
@@ -515,23 +477,12 @@ public class principal extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Agregar Empleados", jPanel1);
 
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-
         jLabel9.setText("Seleccione el empleado a ELiminar");
 
         jButton6.setText("Eliminar");
         jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton6MouseClicked(evt);
-            }
-        });
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
             }
         });
 
@@ -593,50 +544,33 @@ public class principal extends javax.swing.JFrame {
                 jButton11MouseClicked(evt);
             }
         });
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
-            }
-        });
         jPanel4.add(jButton11);
-        jButton11.setBounds(160, 260, 65, 31);
+        jButton11.setBounds(160, 260, 75, 23);
 
         jLabel17.setText("Seleccione el Producto a Modificar");
         jPanel4.add(jLabel17);
-        jLabel17.setBounds(120, 20, 240, 17);
+        jLabel17.setBounds(120, 20, 240, 14);
 
         jLabel18.setText("Nombre ");
         jPanel4.add(jLabel18);
-        jLabel18.setBounds(59, 104, 49, 17);
-
-        Nombre_producto_mod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Nombre_producto_modActionPerformed(evt);
-            }
-        });
+        jLabel18.setBounds(59, 104, 40, 14);
         jPanel4.add(Nombre_producto_mod);
-        Nombre_producto_mod.setBounds(141, 104, 180, 27);
+        Nombre_producto_mod.setBounds(141, 104, 180, 20);
 
         jLabel19.setText("Descripción");
         jPanel4.add(jLabel19);
-        jLabel19.setBounds(60, 170, 66, 17);
-
-        Descripcion_producto_mod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Descripcion_producto_modActionPerformed(evt);
-            }
-        });
+        jLabel19.setBounds(60, 170, 54, 14);
         jPanel4.add(Descripcion_producto_mod);
-        Descripcion_producto_mod.setBounds(141, 164, 170, 27);
+        Descripcion_producto_mod.setBounds(141, 164, 180, 20);
 
         jPanel4.add(jComboBox5);
-        jComboBox5.setBounds(150, 40, 154, 27);
+        jComboBox5.setBounds(150, 40, 154, 20);
 
         jLabel20.setText("Tiempo");
         jPanel4.add(jLabel20);
-        jLabel20.setBounds(60, 230, 42, 17);
+        jLabel20.setBounds(60, 230, 34, 14);
         jPanel4.add(tiempo_producto_mod);
-        tiempo_producto_mod.setBounds(140, 220, 180, 27);
+        tiempo_producto_mod.setBounds(140, 220, 180, 20);
 
         jTabbedPane2.addTab("Modificar  Producto", jPanel4);
 
@@ -654,13 +588,8 @@ public class principal extends javax.swing.JFrame {
                 jButton12MouseClicked(evt);
             }
         });
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
-            }
-        });
 
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel40.setText("Agregar materiales");
 
@@ -668,11 +597,6 @@ public class principal extends javax.swing.JFrame {
         jButton14.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton14MouseClicked(evt);
-            }
-        });
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
             }
         });
 
@@ -731,23 +655,12 @@ public class principal extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Agregar Producto", jPanel5);
 
-        jComboBox6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox6ActionPerformed(evt);
-            }
-        });
-
         jLabel39.setText("Seleccione el producto a ELiminar");
 
         jButton13.setText("Eliminar");
         jButton13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton13MouseClicked(evt);
-            }
-        });
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
             }
         });
 
@@ -809,18 +722,13 @@ public class principal extends javax.swing.JFrame {
         });
 
         jButton2.setText("Productos ");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
         jButton3.setText("Empleados");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
-            }
-        });
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -828,11 +736,6 @@ public class principal extends javax.swing.JFrame {
         });
 
         jButton4.setText("Materiales");
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton4MouseClicked(evt);
-            }
-        });
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -879,10 +782,10 @@ public class principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        this.jMateriales.setModal(true);
-        this.jMateriales.pack();
-        this.jMateriales.setLocationRelativeTo(this);
-        this.jMateriales.setVisible(true);
+        this.jEmpleados.setModal(true);
+        this.jEmpleados.pack();
+        this.jEmpleados.setLocationRelativeTo(this);
+        this.jEmpleados.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -890,12 +793,11 @@ public class principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        this.jMateriales.setModal(true);
+        this.jMateriales.pack();
+        this.jMateriales.setLocationRelativeTo(this);
+        this.jMateriales.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void Dirección_materialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Dirección_materialesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Dirección_materialesActionPerformed
 
     private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
         empleados empleado = new empleados(this.Nombre_Empleado.getText(), (Integer.parseInt(this.Identidad_Empleado.getText())), (Integer.parseInt(this.Edad_Empleado.getText())), this.Direccion_Empleado.getText());
@@ -903,14 +805,6 @@ public class principal extends javax.swing.JFrame {
         Empleados.print();
 
     }//GEN-LAST:event_jButton7MouseClicked
-
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        this.jEmpleados.setModal(true);
-        this.jEmpleados.pack();
-        this.jEmpleados.setLocationRelativeTo(this);
-        this.jEmpleados.setVisible(true);
-
-    }//GEN-LAST:event_jButton3MouseClicked
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         if (this.jTabbedPane1.getSelectedIndex() == 0) {
@@ -931,34 +825,6 @@ public class principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
-    private void DireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DireccionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DireccionActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void NombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NombreActionPerformed
-
-    private void IdentidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdentidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_IdentidadActionPerformed
-
-    private void EdadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EdadActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
-
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
 
         Empleados.remove(this.jComboBox1.getSelectedIndex());
@@ -978,10 +844,6 @@ public class principal extends javax.swing.JFrame {
         ((empleados) this.jComboBox2.getSelectedItem()).setDireccion(this.Direccion.getText());
        ((empleados) this.jComboBox2.getSelectedItem()).setEdad(Integer.parseInt(this.Edad.getText()));
     }//GEN-LAST:event_jButton5MouseClicked
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
         materiales material = new materiales(this.Nombre_Materiales.getText(), this.Dirección_materiales.getText(), this.marca_matriales.getText(), Integer.parseInt(this.Numero_de_seriemateriales.getText()));
@@ -1026,15 +888,7 @@ public class principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton8MouseClicked
 
-    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        this.jMateriales.setModal(true);
-        this.jMateriales.pack();
-        this.jMateriales.setLocationRelativeTo(this);
-        this.jMateriales.setVisible(true);
-    }//GEN-LAST:event_jButton4MouseClicked
-
     private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
-
         Node temp = Materiales.first();
         int cantidad = 0;
         while (cantidad < Materiales.size()) {
@@ -1105,43 +959,22 @@ public class principal extends javax.swing.JFrame {
         System.out.println("a");
         Materiales.print();
         System.out.println("b");
-        System.out.println((Inventario.size()));
-        
+        System.out.println((Inventario.size()));        
     }//GEN-LAST:event_jButton10MouseClicked
 
     private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseClicked
-     ((productos)this.jComboBox5.getSelectedItem()).setNombre(this.Nombre_producto_mod.getText());
-     ((productos)this.jComboBox5.getSelectedItem()).setDescripcion(this.Descripcion_producto_mod.getText());
-     ((productos)this.jComboBox5.getSelectedItem()).setTiempo(Integer.parseInt(this.tiempo_producto_mod.getText()));
+        ((productos) this.jComboBox5.getSelectedItem()).setNombre(this.Nombre_producto_mod.getText());
+        ((productos) this.jComboBox5.getSelectedItem()).setDescripcion(this.Descripcion_producto_mod.getText());
+        ((productos) this.jComboBox5.getSelectedItem()).setTiempo(Integer.parseInt(this.tiempo_producto_mod.getText()));
     }//GEN-LAST:event_jButton11MouseClicked
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11ActionPerformed
-
-    private void Nombre_producto_modActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Nombre_producto_modActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Nombre_producto_modActionPerformed
-
-    private void Descripcion_producto_modActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Descripcion_producto_modActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Descripcion_producto_modActionPerformed
-
     private void jButton12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseClicked
-       List nueva_lista=new List();
-       nueva_lista=materiales_de_productos;
-       materiales_de_productos=new List();
+        List nueva_lista=new List();
+        nueva_lista=materiales_de_productos;
+        materiales_de_productos=new List();
         productos producto=new productos(this.Nombre_Producto.getText(),this.Descripcion_producto.getText(),Integer.parseInt(this.tiempo.getText()),nueva_lista);
         Productos_Inventario.push_back(producto);
     }//GEN-LAST:event_jButton12MouseClicked
-
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12ActionPerformed
-
-    private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox6ActionPerformed
 
     private void jButton13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseClicked
         Productos_Inventario.remove(this.jComboBox6.getSelectedIndex());
@@ -1151,10 +984,6 @@ public class principal extends javax.swing.JFrame {
             modelo.addElement(Productos_Inventario.elementAt(x).getValue());
         }
     }//GEN-LAST:event_jButton13MouseClicked
-
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jTabbedPane2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane2StateChanged
         if(this.jTabbedPane2.getSelectedIndex()==0 ){
@@ -1185,16 +1014,12 @@ public class principal extends javax.swing.JFrame {
        materiales_de_productos.push_back(this.jComboBox7.getSelectedItem());
     }//GEN-LAST:event_jButton14MouseClicked
 
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        
-    }//GEN-LAST:event_jButton14ActionPerformed
-
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-       this.Productos.setModal(true);
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.Productos.setModal(true);
         this.Productos.pack();
         this.Productos.setLocationRelativeTo(this);
         this.Productos.setVisible(true);
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1238,8 +1063,6 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JTextField Direccion_Empleado;
     private javax.swing.JTextField Direccion_materiales_Mod1;
     private javax.swing.JTextField Dirección_materiales;
-    private javax.swing.JTextField Dirección_materiales1;
-    private javax.swing.JTextField Dirección_materiales2;
     private javax.swing.JTextField Edad;
     private javax.swing.JTextField Edad_Empleado;
     private javax.swing.JTextField Identidad;
@@ -1249,13 +1072,9 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JTextField Nombre;
     private javax.swing.JTextField Nombre_Empleado;
     private javax.swing.JTextField Nombre_Materiales;
-    private javax.swing.JTextField Nombre_Materiales1;
-    private javax.swing.JTextField Nombre_Materiales2;
     private javax.swing.JTextField Nombre_Producto;
     private javax.swing.JTextField Nombre_producto_mod;
     private javax.swing.JTextField Numero_de_seriemateriales;
-    private javax.swing.JTextField Numero_de_seriemateriales1;
-    private javax.swing.JTextField Numero_de_seriemateriales2;
     private javax.swing.JDialog Productos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -1299,15 +1118,7 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
@@ -1320,8 +1131,6 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JDialog jMateriales;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1332,11 +1141,7 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JTabbedPane jTabbedPane6;
-    private javax.swing.JTabbedPane jTabbedPane7;
     private javax.swing.JTextField marca_matriales;
-    private javax.swing.JTextField marca_matriales1;
-    private javax.swing.JTextField marca_matriales2;
     private javax.swing.JTextField numero_deserie_materiales_mod1;
     private javax.swing.JTextField tiempo;
     private javax.swing.JTextField tiempo_producto_mod;
