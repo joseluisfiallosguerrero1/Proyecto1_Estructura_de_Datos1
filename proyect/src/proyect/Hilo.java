@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package proyect;
+
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Christian
@@ -24,17 +27,17 @@ public class Hilo implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("\"El empleado " + Thread.currentThread().getName()
+        System.out.println("\"El empleado " + empleado.getNombre() + Thread.currentThread().getName()
                 + "\" COMIENZA A PROCESAR LA MANUFACTURA DEL PRODUCTO " + this.productos.getNombre()
-                + " EN EL TIEMPO: " + (System.currentTimeMillis() - this.initialTime) / 1000 + "seg");
+                + " EN EL TIEMPO: " + (System.currentTimeMillis() - this.initialTime) / 1000 + " segundos");
         this.esperarXsegundos(productos.getTiempo());
         System.out.println("Procesado el producto " + " del " + this.productos.getNombre()
-                + "->Tiempo: " + (System.currentTimeMillis() - this.initialTime) / 1000 + "seg");
+                + "->Tiempo: " + (System.currentTimeMillis() - this.initialTime) / 1000 + " segundos");
         
 
         System.out.println("\"El empleado " + empleado.getNombre() + Thread.currentThread().getName() + "\" HA TERMINADO DE PROCESAR "
                 + this.productos.getNombre() + " EN EL TIEMPO: "
-                + (System.currentTimeMillis() - this.initialTime) / 1000 + "seg");
+                + (System.currentTimeMillis() - this.initialTime) / 1000 + " segundos");
 
     }
 

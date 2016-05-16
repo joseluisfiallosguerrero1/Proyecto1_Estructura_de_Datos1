@@ -932,11 +932,6 @@ public class principal extends javax.swing.JFrame {
                 Stack nuevo = new Stack(material);
                 Inventario.push_back(nuevo);
             }
-            Catalogo.print();
-            System.out.println("a");
-            Materiales.print();
-            System.out.println("b");
-            System.out.println((Inventario.size()));
             JOptionPane.showMessageDialog(this, "El material ha sido agregado. ");
             Nombre_Materiales.setText("");
             Numero_de_seriemateriales.setText("");
@@ -964,11 +959,6 @@ public class principal extends javax.swing.JFrame {
             for (int x = 0; x < Catalogo.size(); x++) {
                 modelo.addElement(Catalogo.elementAt(x).getValue());
             }
-            Catalogo.print();
-            System.out.println("a");
-            Materiales.print();
-            System.out.println("b");
-            System.out.println((Inventario.size()));
             JOptionPane.showMessageDialog(this, "El material ha sido modificado. ");
             Nombre_Materiales.setText("");
             Numero_de_seriemateriales.setText("");
@@ -1010,7 +1000,6 @@ public class principal extends javax.swing.JFrame {
                 contador++;
             }
             Node temp = Materiales.first();
-            int numero = this.jComboBox3.getSelectedIndex();
             while (cantidad < Materiales.size()) {
                 if (((materiales) (temp.getValue())).getNombre().equals(trim((String) this.jComboBox3.getSelectedItem()))) {
                     temp = temp.getNext();
@@ -1021,11 +1010,6 @@ public class principal extends javax.swing.JFrame {
                 }
                 cantidad++;
             }
-            Catalogo.print();
-            System.out.println("a");
-            Materiales.print();
-            System.out.println("b");
-            System.out.println((Inventario.size()));
             DefaultComboBoxModel modelo = (DefaultComboBoxModel) this.jComboBox3.getModel();
             modelo.removeAllElements();
             for (int x = 0; x < Catalogo.size(); x++) {
@@ -1127,10 +1111,71 @@ public class principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jProcesosWindowOpened
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        ordenes.queue(jComboBox8.getSelectedItem());
+        productos producto_seleccionado = (productos) this.jComboBox8.getSelectedItem();
+        List temp = new List();
+        int cantidad = 0;
+        int cantidad2 = 0;
+        boolean si_hay = true;
+        temp = producto_seleccionado.getMateriales();
+        materiales temporal = new materiales();
+        for (int i = 0; i < temp.size(); i++) {
+            temporal = (materiales) temp.elementAt(i).getValue();
+            for (int j = 0; j < temp.size(); j++) {
+                if (temporal.getNombre().equals(((materiales) temp.elementAt(j).getValue()).getNombre())) {
+                    cantidad++;
+                    temp.remove(j);
+                }
+            }
+            for (int j = 0; j < Materiales.size(); j++) {
+                if (temporal.getNombre().equals(((materiales) Materiales.elementAt(j).getValue()).getNombre())) {
+                    cantidad2++;
+
+                }
+            }
+            if (cantidad > cantidad2) {
+
+            } else {
+                si_hay = false;
+            }
+            cantidad = 0;
+            cantidad2 = 0;
+        }
+        if (si_hay == true) {
+            ordenes.queue(jComboBox8.getSelectedItem());
+            for (int i = 0; i < temp.size(); i++) {
+                temporal = (materiales) temp.elementAt(i).getValue();
+                for (int j = 0; j < temp.size(); j++) {
+                    if (temporal.getNombre().equals(((materiales) temp.elementAt(j).getValue()).getNombre())) {
+                        cantidad++;
+                        temp.remove(j);
+                    }
+                }
+                int copia_cantidad = cantidad;
+                for (int j = 0; j < Materiales.size(); j++) {
+                    if (temporal.getNombre().equals(((materiales) Materiales.elementAt(j).getValue()).getNombre())) {
+                        if (cantidad > 0) {
+                            Materiales.remove(j);
+                        }
+                        cantidad--;
+                    }
+                }
+                for (int j = 0; j < Inventario.size(); j++) {
+                    if (temporal.getNombre().equals(((materiales) ((Stack) Inventario.elementAt(j).getValue()).peek()).getNombre())) {
+                        for (int k = 0; k < copia_cantidad; k++) {
+                            ((Stack) Inventario.elementAt(i).getValue()).pop_back();
+                        }
+                    }
+                }
+                cantidad = 0;
+            }
+
+        }else{
+            JOptionPane.showMessageDialog(null,"Lo lamento no hay materiales");
+        }
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        eliminarMateriales(Materiales, materiales_de_productos);
         long time = System.currentTimeMillis();
         ExecutorService exec = Executors.newFixedThreadPool(Empleados.size());
         empleados emp = new empleados();
@@ -1147,8 +1192,8 @@ public class principal extends javax.swing.JFrame {
         exec.shutdown();
         while (!exec.isTerminated()) {
         }
-        long endTime = System.currentTimeMillis();
-        JOptionPane.showMessageDialog(this, "Se termino en: " + (int) endTime);
+        long endTime= System.currentTimeMillis();
+        JOptionPane.showMessageDialog(this, "Se termino la manufactura en: "+((endTime-time)/1000)+ " segundos");
     }//GEN-LAST:event_jButton16ActionPerformed
 
     /**
@@ -1165,16 +1210,21 @@ public class principal extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -1197,6 +1247,24 @@ public class principal extends javax.swing.JFrame {
             return true;
         } else {
             return true;
+        }
+    }
+
+    private void eliminarMateriales(List listaMateriales, List listaMaterialesProducto) {
+        int contador = 0;
+        for (int i = 0; i < listaMaterialesProducto.size(); i++) {
+            for (int j = 0; j < listaMateriales.size(); j++) {
+                if (listaMaterialesProducto.elementAt(i) == listaMateriales.elementAt(i)) {
+                    listaMateriales.remove(i);
+                } else {
+                    contador++;
+                }
+                if (contador == listaMateriales.size()) {
+                    JOptionPane.showMessageDialog(this, "No hay suficiente "
+                            + listaMateriales.elementAt(i) + "para la manufactura del producto.");
+                    contador = 0;
+                }
+            }
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
