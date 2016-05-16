@@ -13,7 +13,7 @@ public class Hilo implements Runnable {
     private productos productos;
     private long initialTime;
 
-    public Hilo(List empleados, productos productos, long initialTime) {
+    public Hilo(productos productos, List empleados,  long initialTime) {
         this.empleados = empleados;
         this.productos = productos;
         this.initialTime = initialTime;

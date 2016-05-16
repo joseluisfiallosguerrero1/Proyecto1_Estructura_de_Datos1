@@ -5,7 +5,10 @@
  */
 package proyect;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import static jdk.nashorn.internal.objects.NativeString.trim;
 
 /**
@@ -18,8 +21,8 @@ public class principal extends javax.swing.JFrame {
     List Catalogo = new List();
     List Inventario = new List();
     List Empleados = new List();
-    List Productos_Inventario=new List();
-    List materiales_de_productos=new List();
+    List Productos_Inventario = new List();
+    List materiales_de_productos = new List();
     Queue ordenes = new Queue();
 
     /**
@@ -27,6 +30,7 @@ public class principal extends javax.swing.JFrame {
      */
     public principal() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -121,6 +125,11 @@ public class principal extends javax.swing.JFrame {
         jComboBox6 = new javax.swing.JComboBox<String>();
         jLabel39 = new javax.swing.JLabel();
         jButton13 = new javax.swing.JButton();
+        jProcesos = new javax.swing.JDialog();
+        jComboBox8 = new javax.swing.JComboBox();
+        jLabel28 = new javax.swing.JLabel();
+        jButton15 = new javax.swing.JButton();
+        jButton16 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -609,23 +618,27 @@ public class principal extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel36, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel36, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(jLabel40)))
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton14)
+                            .addComponent(Descripcion_producto, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                            .addComponent(Nombre_Producto, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                            .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tiempo)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel40)))
-                .addGap(36, 36, 36)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton14)
-                    .addComponent(jButton12)
-                    .addComponent(Descripcion_producto, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                    .addComponent(Nombre_Producto, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                    .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tiempo))
-                .addContainerGap(50, Short.MAX_VALUE))
+                        .addGap(159, 159, 159)
+                        .addComponent(jButton12)))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -648,9 +661,9 @@ public class principal extends javax.swing.JFrame {
                     .addComponent(jLabel40))
                 .addGap(54, 54, 54)
                 .addComponent(jButton14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addComponent(jButton12)
-                .addGap(36, 36, 36))
+                .addGap(55, 55, 55))
         );
 
         jTabbedPane2.addTab("Agregar Producto", jPanel5);
@@ -708,6 +721,61 @@ public class principal extends javax.swing.JFrame {
             .addGroup(ProductosLayout.createSequentialGroup()
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 36, Short.MAX_VALUE))
+        );
+
+        jProcesos.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                jProcesosWindowOpened(evt);
+            }
+        });
+
+        jLabel28.setText("Escoger Productos");
+
+        jButton15.setText("Agregar A Orden");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
+
+        jButton16.setText("Realizar la Orden");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jProcesosLayout = new javax.swing.GroupLayout(jProcesos.getContentPane());
+        jProcesos.getContentPane().setLayout(jProcesosLayout);
+        jProcesosLayout.setHorizontalGroup(
+            jProcesosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jProcesosLayout.createSequentialGroup()
+                .addGroup(jProcesosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton16)
+                    .addGroup(jProcesosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jProcesosLayout.createSequentialGroup()
+                            .addGap(145, 145, 145)
+                            .addComponent(jLabel28))
+                        .addGroup(jProcesosLayout.createSequentialGroup()
+                            .addGap(165, 165, 165)
+                            .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jProcesosLayout.createSequentialGroup()
+                            .addGap(136, 136, 136)
+                            .addComponent(jButton15))))
+                .addContainerGap(149, Short.MAX_VALUE))
+        );
+        jProcesosLayout.setVerticalGroup(
+            jProcesosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jProcesosLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel28)
+                .addGap(36, 36, 36)
+                .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addComponent(jButton15)
+                .addGap(35, 35, 35)
+                .addComponent(jButton16)
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -789,7 +857,10 @@ public class principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        this.jProcesos.setModal(true);
+        this.jProcesos.pack();
+        this.jProcesos.setLocationRelativeTo(this);
+        this.jProcesos.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -803,7 +874,6 @@ public class principal extends javax.swing.JFrame {
         empleados empleado = new empleados(this.Nombre_Empleado.getText(), (Integer.parseInt(this.Identidad_Empleado.getText())), (Integer.parseInt(this.Edad_Empleado.getText())), this.Direccion_Empleado.getText());
         Empleados.push_back(empleado);
         Empleados.print();
-
     }//GEN-LAST:event_jButton7MouseClicked
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
@@ -821,12 +891,9 @@ public class principal extends javax.swing.JFrame {
                 modelo.addElement(Empleados.elementAt(x).getValue());
             }
         }
-
-
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
-
         Empleados.remove(this.jComboBox1.getSelectedIndex());
         DefaultComboBoxModel modelo = (DefaultComboBoxModel) this.jComboBox1.getModel();
         modelo.removeAllElements();
@@ -842,50 +909,45 @@ public class principal extends javax.swing.JFrame {
         System.out.println(((empleados) (Empleados.elementAt(0).getValue())).toString());
         ((empleados) this.jComboBox2.getSelectedItem()).setIdentidad(Integer.parseInt(this.Identidad.getText()));
         ((empleados) this.jComboBox2.getSelectedItem()).setDireccion(this.Direccion.getText());
-       ((empleados) this.jComboBox2.getSelectedItem()).setEdad(Integer.parseInt(this.Edad.getText()));
+        ((empleados) this.jComboBox2.getSelectedItem()).setEdad(Integer.parseInt(this.Edad.getText()));
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
-        materiales material = new materiales(this.Nombre_Materiales.getText(), this.Dirección_materiales.getText(), this.marca_matriales.getText(), Integer.parseInt(this.Numero_de_seriemateriales.getText()));
-        Materiales.push_back(material);
-        Node temp = Catalogo.first();
-        boolean existe = false;
-
-        int cantidad = 0;
-        while (cantidad < Catalogo.size()) {
-            if (((materiales) (temp.getValue())).getNombre().equals(trim(this.Nombre_Materiales.getText()))) {
-                existe = true;
-                break;
-            }
-            temp = temp.getNext();
-
-            cantidad++;
-        }
-        cantidad = 0;
-        if (existe == true) {
-            Node temporal = Inventario.first();
-            while (cantidad < Inventario.size()) {
-                if ((((materiales) (((Stack) temporal.getValue()).peek())).getNombre()).equals(trim(this.Nombre_Materiales.getText()))) {
-                    ((Stack) temporal.getValue()).push_back(material);
+        if (validar_serie(Materiales, Integer.parseInt(this.Numero_de_seriemateriales.getText()))) {
+            materiales material = new materiales(this.Nombre_Materiales.getText(), this.Dirección_materiales.getText(), this.marca_matriales.getText(), Integer.parseInt(this.Numero_de_seriemateriales.getText()));
+            Materiales.push_back(material);
+            Node temp = Catalogo.first();
+            boolean existe = false;
+            int cantidad = 0;
+            while (cantidad < Catalogo.size()) {
+                if (((materiales) (temp.getValue())).getNombre().equals(trim(this.Nombre_Materiales.getText()))) {
+                    existe = true;
+                    break;
                 }
-                temporal = temporal.getNext();
-
+                temp = temp.getNext();
                 cantidad++;
             }
-        } else {
-
-            Catalogo.push_back(material);
-            Stack nuevo = new Stack(material);
-            Inventario.push_back(nuevo);
-
+            cantidad = 0;
+            if (existe == true) {
+                Node temporal = Inventario.first();
+                while (cantidad < Inventario.size()) {
+                    if ((((materiales) (((Stack) temporal.getValue()).peek())).getNombre()).equals(trim(this.Nombre_Materiales.getText()))) {
+                        ((Stack) temporal.getValue()).push_back(material);
+                    }
+                    temporal = temporal.getNext();
+                    cantidad++;
+                }
+            } else {
+                Catalogo.push_back(material);
+                Stack nuevo = new Stack(material);
+                Inventario.push_back(nuevo);
+            }
+            Catalogo.print();
+            System.out.println("a");
+            Materiales.print();
+            System.out.println("b");
+            System.out.println((Inventario.size()));
         }
-        Catalogo.print();
-        System.out.println("a");
-        Materiales.print();
-        System.out.println("b");
-        System.out.println((Inventario.size()));
-
-
     }//GEN-LAST:event_jButton8MouseClicked
 
     private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
@@ -921,37 +983,31 @@ public class principal extends javax.swing.JFrame {
                 this.jComboBox3.addItem(((materiales) Catalogo.elementAt(i).getValue()).getNombre());
             }
         }
-
     }//GEN-LAST:event_jTabbedPane5StateChanged
 
     private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseClicked
         int cantidad = 0;
-        int contador=0;
-        Node temp1=Catalogo.first();
+        int contador = 0;
+        Node temp1 = Catalogo.first();
         while (contador < Catalogo.size()) {
             if (((materiales) (temp1.getValue())).getNombre().equals(trim((String) this.jComboBox3.getSelectedItem()))) {
                 temp1 = temp1.getNext();
                 Catalogo.remove(contador);
                 Inventario.remove(contador);
-                
             } else {
                 temp1 = temp1.getNext();
-                
             }
             contador++;
         }
         Node temp = Materiales.first();
-        int numero=this.jComboBox3.getSelectedIndex();
-        
+        int numero = this.jComboBox3.getSelectedIndex();
         while (cantidad < Materiales.size()) {
             if (((materiales) (temp.getValue())).getNombre().equals(trim((String) this.jComboBox3.getSelectedItem()))) {
                 temp = temp.getNext();
                 Materiales.remove(cantidad);
-                
-                
+
             } else {
                 temp = temp.getNext();
-                
             }
             cantidad++;
         }
@@ -959,7 +1015,7 @@ public class principal extends javax.swing.JFrame {
         System.out.println("a");
         Materiales.print();
         System.out.println("b");
-        System.out.println((Inventario.size()));        
+        System.out.println((Inventario.size()));
     }//GEN-LAST:event_jButton10MouseClicked
 
     private void jButton11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton11MouseClicked
@@ -969,10 +1025,10 @@ public class principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton11MouseClicked
 
     private void jButton12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseClicked
-        List nueva_lista=new List();
-        nueva_lista=materiales_de_productos;
-        materiales_de_productos=new List();
-        productos producto=new productos(this.Nombre_Producto.getText(),this.Descripcion_producto.getText(),Integer.parseInt(this.tiempo.getText()),nueva_lista);
+        List nueva_lista = new List();
+        nueva_lista = materiales_de_productos;
+        materiales_de_productos = new List();
+        productos producto = new productos(this.Nombre_Producto.getText(), this.Descripcion_producto.getText(), Integer.parseInt(this.tiempo.getText()), nueva_lista);
         Productos_Inventario.push_back(producto);
     }//GEN-LAST:event_jButton12MouseClicked
 
@@ -986,32 +1042,32 @@ public class principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton13MouseClicked
 
     private void jTabbedPane2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane2StateChanged
-        if(this.jTabbedPane2.getSelectedIndex()==0 ){
+        if (this.jTabbedPane2.getSelectedIndex() == 0) {
             DefaultComboBoxModel modelo = (DefaultComboBoxModel) this.jComboBox5.getModel();
             modelo.removeAllElements();
             for (int x = 0; x < Productos_Inventario.size(); x++) {
                 modelo.addElement(Productos_Inventario.elementAt(x).getValue());
             }
         }
-         if( this.jTabbedPane2.getSelectedIndex()==2){
+        if (this.jTabbedPane2.getSelectedIndex() == 2) {
             DefaultComboBoxModel modelo = (DefaultComboBoxModel) this.jComboBox6.getModel();
             modelo.removeAllElements();
             for (int x = 0; x < Productos_Inventario.size(); x++) {
                 modelo.addElement(Productos_Inventario.elementAt(x).getValue());
             }
         }
-        if( this.jTabbedPane2.getSelectedIndex()==1){
+        if (this.jTabbedPane2.getSelectedIndex() == 1) {
             DefaultComboBoxModel modelo = (DefaultComboBoxModel) this.jComboBox7.getModel();
             modelo.removeAllElements();
             for (int x = 0; x < Catalogo.size(); x++) {
                 modelo.addElement(Catalogo.elementAt(x).getValue());
             }
-        } 
-        
+        }
+
     }//GEN-LAST:event_jTabbedPane2StateChanged
 
     private void jButton14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton14MouseClicked
-       materiales_de_productos.push_back(this.jComboBox7.getSelectedItem());
+        materiales_de_productos.push_back(this.jComboBox7.getSelectedItem());
     }//GEN-LAST:event_jButton14MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1020,6 +1076,33 @@ public class principal extends javax.swing.JFrame {
         this.Productos.setLocationRelativeTo(this);
         this.Productos.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jProcesosWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jProcesosWindowOpened
+        DefaultComboBoxModel modelo = (DefaultComboBoxModel) this.jComboBox8.getModel();
+        modelo.removeAllElements();
+        for (int x = 0; x < Productos_Inventario.size(); x++) {
+            modelo.addElement(Productos_Inventario.elementAt(x).getValue());
+        }
+    }//GEN-LAST:event_jProcesosWindowOpened
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        ordenes.queue(jComboBox8.getSelectedItem());
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        long time = System.currentTimeMillis();
+        ExecutorService exec = Executors.newFixedThreadPool(Empleados.size());
+        while (ordenes.size() > 0) {
+            productos producto = (productos) ordenes.dequeue().getValue();
+            Runnable correr = new Hilo(producto, Empleados, time);
+            exec.execute(correr);
+        }
+        exec.shutdown();
+        while (!exec.isTerminated()) {
+        }
+        long endTime = System.currentTimeMillis();
+        JOptionPane.showMessageDialog(this, "Se termino en: ", null, (int) endTime, null);
+    }//GEN-LAST:event_jButton16ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1056,6 +1139,19 @@ public class principal extends javax.swing.JFrame {
         });
     }
 
+    private boolean validar_serie(List listaMateriales, int numSerie) {
+        if (listaMateriales.size() > 0) {
+            for (int i = 0; i < listaMateriales.size(); i++) {
+                if (((materiales) listaMateriales.elementAt(i).getValue()).getNumero_de_serie() == numSerie) {
+                    JOptionPane.showMessageDialog(this, "El numero de serie ya esta tomado");
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return true;
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Descripcion_producto;
     private javax.swing.JTextField Descripcion_producto_mod;
@@ -1082,6 +1178,8 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1097,6 +1195,7 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JComboBox<String> jComboBox7;
+    private javax.swing.JComboBox jComboBox8;
     private javax.swing.JDialog jEmpleados;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1118,6 +1217,7 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel39;
@@ -1138,6 +1238,7 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JDialog jProcesos;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane5;
