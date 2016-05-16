@@ -12,27 +12,27 @@ public class Hilo implements Runnable {
     private final List empleados;
     private productos productos;
     private long initialTime;
+    private empleados empleado;
+    
 
-    public Hilo(productos productos, List empleados,  long initialTime) {
+    public Hilo(productos productos, List empleados,  long initialTime, empleados empleado) {
         this.empleados = empleados;
         this.productos = productos;
         this.initialTime = initialTime;
+        this.empleado=empleado;
     }
 
     @Override
     public void run() {
-        /*System.out.println("\"La cajera " + Thread.currentThread().getName()
-                + "\" COMIENZA A PROCESAR LA COMPRA DEL CLIENTE " + this.productos.getNombre()
-                + " EN EL TIEMPO: " + (System.currentTimeMillis() - this.initialTime) / 1000 + "seg");*/
+        System.out.println("\"El empleado " + Thread.currentThread().getName()
+                + "\" COMIENZA A PROCESAR LA MANUFACTURA DEL PRODUCTO " + this.productos.getNombre()
+                + " EN EL TIEMPO: " + (System.currentTimeMillis() - this.initialTime) / 1000 + "seg");
+        this.esperarXsegundos(productos.getTiempo());
+        System.out.println("Procesado el producto " + " del " + this.productos.getNombre()
+                + "->Tiempo: " + (System.currentTimeMillis() - this.initialTime) / 1000 + "seg");
+        
 
-        for (int i = 0; i < this.empleados.size(); i++) {
-            // Se procesa el pedido en X segundos
-            this.esperarXsegundos(productos.getTiempo());
-            System.out.println("Procesado el producto " + (i + 1) + " del " + this.productos.getNombre()
-                    + "->Tiempo: " + (System.currentTimeMillis() - this.initialTime) / 1000 + "seg");
-        }
-
-        System.out.println("\"La cajera " + Thread.currentThread().getName() + "\" HA TERMINADO DE PROCESAR "
+        System.out.println("\"El empleado " + empleado.getNombre() + Thread.currentThread().getName() + "\" HA TERMINADO DE PROCESAR "
                 + this.productos.getNombre() + " EN EL TIEMPO: "
                 + (System.currentTimeMillis() - this.initialTime) / 1000 + "seg");
 
@@ -58,7 +58,7 @@ public class Hilo implements Runnable {
         return productos;
     }
 
-    public void setCliente(productos producto) {
-        this.productos = productos;
+    public void setProducto(productos producto) {
+        this.productos = producto;
     }
 }

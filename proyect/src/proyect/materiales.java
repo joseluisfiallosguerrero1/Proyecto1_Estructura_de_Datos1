@@ -68,7 +68,7 @@ public class materiales {
 
     @Override
     public String toString() {
-        return "materiales{" + "nombre=" + nombre + ", descripcion=" + descripcion + ", marca=" + marca + ", numero_de_serie=" + numero_de_serie + '}';
+        return nombre;
     }
     
     
